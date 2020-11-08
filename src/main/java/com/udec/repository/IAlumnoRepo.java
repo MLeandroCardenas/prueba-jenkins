@@ -16,7 +16,7 @@ public interface IAlumnoRepo extends JpaRepository<Alumno, Integer> {
 	Alumno findByIdentificacion (String identificacion);
 
 	@Query(value = "SELECT a FROM Alumno a")
-	List<Alumno> findAllAlumnos (Sort sort);
+	List<Alumno> findAllAlumnos (Sort sort)
 	
 	@Query("SELECT COUNT (a) FROM Alumno a WHERE a.identificacion = :identificacion OR a.id = :id")
 	long validarUsuarioEditar(String identificacion, int id);
