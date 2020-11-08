@@ -1,5 +1,4 @@
-
-/*package com.udec.repository;
+package com.udec.repository;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ import com.udec.entity.Alumno;
 public interface IAlumnoRepo extends JpaRepository<Alumno, Integer> {
 	
 	Alumno findByIdentificacion (String identificacion);
-	Alumno findByIdentificacionDos (String identificacion);
 
 
 	@Query(value = "SELECT a FROM Alumno a")
@@ -29,5 +27,3 @@ public interface IAlumnoRepo extends JpaRepository<Alumno, Integer> {
 	Page<Alumno> findByNombresIgnoreCase(Pageable pageable, String nombre);
 	
 }
-
-*/
