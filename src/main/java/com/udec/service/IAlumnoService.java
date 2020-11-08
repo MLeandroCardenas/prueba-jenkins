@@ -1,4 +1,4 @@
-package com.udec.service;
+/*package com.udec.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -10,3 +10,4 @@ public interface IAlumnoService extends IOperacionesGenericas<Alumno, Integer> {
 	Page<Alumno> listarPorNombre(int page, int size, String nombre);
 	boolean validarFecha(Alumno alumno);
 }
+*/
