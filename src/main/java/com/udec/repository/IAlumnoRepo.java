@@ -1,4 +1,5 @@
-package com.udec.repository;
+
+/*package com.udec.repository;
 
 import java.util.List;
 
@@ -28,3 +29,5 @@ public interface IAlumnoRepo extends JpaRepository<Alumno, Integer> {
 	Page<Alumno> findByNombresIgnoreCase(Pageable pageable, String nombre);
 	
 }
+
+*/
