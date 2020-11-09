@@ -1,4 +1,4 @@
-/*package com.udec.entity;
+package com.udec.entity;
 
 import java.time.LocalDate;
 import javax.persistence.Column;
@@ -110,4 +110,4 @@ public class Alumno {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 }
-*/
+
