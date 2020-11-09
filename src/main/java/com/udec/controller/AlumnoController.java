@@ -48,7 +48,7 @@ public class AlumnoController {
 	@ApiResponses(value = { @ApiResponse (code = 404, message = "Registro no encontrado") })
 	public ResponseEntity<List<Alumno>> obtenerAlumnosOrdenado() {		
 		List<Alumno> alumno = servicioAlumno.ordenarPorNombres();
-		return new ResponseEntity<List<Alumno>>(alumno,HttpStatus.OK);	
+		return new ResponseEntity<List<Alumno>>(alumno,HttpStatus.OK)
 	}
 	
 	@GetMapping("/listar/{lazy}/{id}")
