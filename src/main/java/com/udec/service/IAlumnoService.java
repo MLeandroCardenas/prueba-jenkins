@@ -1,4 +1,4 @@
-/*
+
 package com.udec.service;
 import java.util.List;
 
@@ -11,4 +11,3 @@ public interface IAlumnoService extends IOperacionesGenericas<Alumno, Integer> {
 	Page<Alumno> listarPorNombre(int page, int size, String nombre);
 	boolean validarFecha(Alumno alumno);
 }
-*/
