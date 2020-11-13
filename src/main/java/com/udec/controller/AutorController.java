@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.udec.dto.AutorLectorDto;
 import com.udec.entity.Autor;
+import com.udec.entity.AutorLector;
+import com.udec.entity.Direccion;
 import com.udec.service.IAutorService;
 import com.udec.views.AutorView;
 
@@ -59,6 +63,15 @@ public class AutorController {
 		return new ResponseEntity<Page<AutorView>>(autores, HttpStatus.OK);	
 	}
 	
+	@GetMapping("/info/autorvista/{id}")
+	@ApiOperation(value = "Obtener registros",
+    notes = "Obtener todos los registros") 	
+	@ApiResponses(value = { @ApiResponse (code = 404, message = "Registro no encontrado") })
+	public ResponseEntity <AutorView> obtenerVistaAutor(@PathVariable @Min(value = 0, message = "minimo 0") Integer id) {		
+		AutorView autor = servicio.vistaInfoAutor(id);
+		return new ResponseEntity <AutorView> (autor, HttpStatus.OK);	
+	}
+	
 	@GetMapping("/listar/{page}/{size}/{nombreLibro}")
 	@ApiOperation(value = "Obtener registros",
     notes = "Obtener todos los registros") 	
@@ -83,10 +96,28 @@ public class AutorController {
 		return new ResponseEntity<Autor>(HttpStatus.CREATED);	
 	}
 	
+	@GetMapping("/autorLector/{page}/{size}/{idAutor}")
+	public ResponseEntity<Page<AutorLector>> listarAutorLector(@PathVariable @Min(value = 0, message = "minimo 0") int page, @PathVariable @Min(value = 1, message = "minimo 1") int size,  @PathVariable Integer idAutor) {		
+		Page<AutorLector> autores = servicio.listarAutoresLectores(page, size, idAutor);
+		return new ResponseEntity<Page<AutorLector>>(autores, HttpStatus.OK);	
+	}
+	
+	@PostMapping("/asociarLector")
+	public ResponseEntity<Autor> guardarAutorLector(@Valid @RequestBody AutorLectorDto autor) {		
+		servicio.guardarAutorLector(autor);
+		return new ResponseEntity<Autor>(HttpStatus.CREATED);	
+	}
+	
 	@PutMapping("/editar")
 	public ResponseEntity<Autor> editarAutor(@Valid @RequestBody Autor autor) {		
 		servicio.editar(autor);
 		return new ResponseEntity<Autor>(autor,HttpStatus.OK);	
+	}
+	
+	@PutMapping("/editarnativo")
+	public ResponseEntity<Direccion> editarDireccionNativo(@Valid @RequestBody Direccion direccion) {		
+		servicio.editarNativo(direccion);
+		return new ResponseEntity<Direccion>(direccion,HttpStatus.OK);	
 	}
 	
 	@DeleteMapping("/eliminar/{id}")

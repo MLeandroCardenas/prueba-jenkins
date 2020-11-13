@@ -38,4 +38,62 @@ public class AutorView {
 	@Column
 	private BigInteger libros;
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getBarrio() {
+		return barrio;
+	}
+
+	public void setBarrio(String barrio) {
+		this.barrio = barrio;
+	}
+
+	public BigInteger getLibros() {
+		return libros;
+	}
+
+	public void setLibros(BigInteger libros) {
+		this.libros = libros;
+	}
+	
+	
+
 }

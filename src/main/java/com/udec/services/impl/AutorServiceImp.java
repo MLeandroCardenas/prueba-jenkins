@@ -4,10 +4,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import com.udec.dto.AutorLectorDto;
 import com.udec.entity.Autor;
+import com.udec.entity.AutorLector;
+import com.udec.entity.Direccion;
+import com.udec.entity.Lector;
 import com.udec.entity.Libro;
 import com.udec.exception.BussinesException;
 import com.udec.exception.ModelNotFoundException;
+import com.udec.repository.IAutorLectorRepo;
 import com.udec.repository.IAutorRepo;
 import com.udec.repository.IVistaAutorRepo;
 import com.udec.service.IAutorService;
@@ -18,6 +24,9 @@ public class AutorServiceImp implements IAutorService {
 	
 	@Autowired
 	private IAutorRepo repoBD;
+	
+	@Autowired
+	private IAutorLectorRepo repoAutorLector;
 	
 	@Autowired
 	private IVistaAutorRepo repoVista;
@@ -128,7 +137,45 @@ public class AutorServiceImp implements IAutorService {
 
 	@Override
 	public Page<AutorView> vistaInfoAutores(int page, int size) {
-		Page<AutorView> listaInfoAutores = repoVista.listarInformacionAutores(PageRequest.of(page, size, Sort.by("apellidos").ascending()));
+		Page<AutorView> listaInfoAutores = repoVista.findAll(PageRequest.of(page, size, Sort.by("apellidos").ascending()));
 		return listaInfoAutores;
+	}
+
+	@Override
+	public AutorView vistaInfoAutor(Integer id) {
+		AutorView vistaAutorId = repoVista.findById(id).orElseThrow(() -> new ModelNotFoundException("No existe un autor con el id " + id));
+		return vistaAutorId;
+	}
+
+	@Override
+	public void editarNativo(Direccion direccion) {
+		if(direccion.getId() == null)
+			throw new BussinesException("El id debe ser obligatorio");
+		else if(!repoBD.existsById(direccion.getId()))
+			throw new ModelNotFoundException("Este id no existe");			
+		else
+			repoBD.editarNativo(direccion.getBarrio(), direccion.getDescripcion(), direccion.getId());
+	}
+
+	@Override
+	public void guardarAutorLector(AutorLectorDto dto) {
+		if(dto.getAutor().getId() == null)
+			throw new BussinesException("El id del autor es requerido");
+		else if(dto.getLector().getId() == null)
+			throw new BussinesException("El id del lector es requerido");
+		else if(dto.getInfoAdicional() == null)
+			throw new BussinesException("Informacion adicional es requerida");
+		else {
+			repoAutorLector.guardarAutorLector(dto.getInfoAdicional(), dto.getAutor().getId(), dto.getLector().getId());
+		}
+	}
+
+	@Override
+	public Page<AutorLector> listarAutoresLectores(int page, int size, Integer idAutor) {
+		Page<AutorLector> listaAutoresLectores = repoAutorLector.listarAutoresLectores(PageRequest.of(page, size), idAutor);
+		for (AutorLector autorLector : listaAutoresLectores) {
+			autorLector.setAutor(null);
+		}
+		return listaAutoresLectores;
 	}
 }
