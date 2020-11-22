@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Programado {
 	
-	@Scheduled(fixedRate = 5000)
+	@Scheduled(fixedRate = 60000)
 	public void ejecutar() {
 		System.out.println("Bienvenidos alumnos....");
 	}
