@@ -1,9 +1,12 @@
 package com.udec.services.impl;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.udec.dto.AutorLectorDto;
 import com.udec.entity.Autor;
@@ -167,6 +170,15 @@ public class AutorServiceImp implements IAutorService {
 			throw new BussinesException("Informacion adicional es requerida");
 		else {
 			repoAutorLector.guardarAutorLector(dto.getInfoAdicional(), dto.getAutor().getId(), dto.getLector().getId());
+		}
+	}
+	
+	@Transactional
+	@Override
+	public void guardarAutorLector(List<AutorLectorDto> dto) {
+		// Validaciones
+		for (AutorLectorDto obj : dto) {
+			repoAutorLector.guardarAutorLector(obj.getInfoAdicional(), obj.getAutor().getId(), obj.getLector().getId());
 		}
 	}
 

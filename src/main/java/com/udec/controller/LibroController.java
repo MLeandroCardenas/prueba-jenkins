@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+
+@PreAuthorize("hasAuthority('Autor') OR hasAuthority('Alumno')")
 @RestController
 @RequestMapping("/libros")
 @Validated
@@ -31,6 +34,7 @@ public class LibroController {
 
 	@Autowired
 	private ILibroService servicio;
+	
 	
 	@GetMapping("/listar/{lazy}/{page}/{size}")
 	@ApiOperation(value = "Obtener registros",
@@ -41,6 +45,7 @@ public class LibroController {
 		return new ResponseEntity<Page<Libro>>(libro, HttpStatus.OK);	
 	}
 	
+	
 	@GetMapping("/listar/{lazy}/{id}")
 	@ApiOperation(value = "Obtener autor",
     notes = "Obtener un autor") 	
@@ -50,18 +55,21 @@ public class LibroController {
 		return new ResponseEntity<Libro>(libro, HttpStatus.OK);	
 	}
 	
+	@PreAuthorize("hasAuthority('Autor')")
 	@PostMapping("/guardar")
 	public ResponseEntity<Libro> guardarLibro(@Valid @RequestBody Libro libro) {		
 		servicio.guardar(libro);
 		return new ResponseEntity<Libro>(HttpStatus.CREATED);	
 	}
 	
+	@PreAuthorize("hasAuthority('Autor')")
 	@PutMapping("/editar")
 	public ResponseEntity<Libro> editarLibro(@Valid @RequestBody Libro libro) {		
 		servicio.editar(libro);
 		return new ResponseEntity<Libro>(libro,HttpStatus.OK);	
 	}
 	
+	@PreAuthorize("hasAuthority('Autor')")
 	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<Libro> eliminarLibro(@PathVariable @Min(value = 1, message = "minimo 1") Integer id) {		
 		servicio.eliminar(id);

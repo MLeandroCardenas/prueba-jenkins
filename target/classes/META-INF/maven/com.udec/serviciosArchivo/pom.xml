@@ -50,6 +50,7 @@
 			    <version>2.3.4.RELEASE</version>
 			</dependency>
 	
+	<!-- Spring data -->
 		 <dependency>
 		 	<groupId>org.postgresql</groupId>
 		 	<artifactId>postgresql</artifactId>
@@ -60,6 +61,8 @@
 		 	<groupId>org.springframework.boot</groupId>
 		 	<artifactId>spring-boot-starter-data-jpa</artifactId>
 		 </dependency> 
+		 
+	<!-- Spring data -->
 		 
 		<dependency>
 	        <groupId>io.springfox</groupId>
@@ -78,7 +81,26 @@
 		    <artifactId>springfox-bean-validators</artifactId>
 		    <version>2.9.2</version>
 		</dependency>
-
+		
+		
+		<!-- Spring security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-jwt</artifactId>
+			<version>1.0.10.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.3.5.RELEASE</version>
+		</dependency>
+				
 	</dependencies>
 	<build>
 		<plugins>

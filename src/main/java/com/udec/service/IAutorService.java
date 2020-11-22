@@ -1,5 +1,7 @@
 package com.udec.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.udec.dto.AutorLectorDto;
@@ -26,5 +28,5 @@ public interface IAutorService extends IOperacionesGenericas<Autor, Integer> {
 	
 	public void guardarAutorLector(AutorLectorDto dto);
 	
-	
+	public void guardarAutorLector(List<AutorLectorDto> dto);
 }
