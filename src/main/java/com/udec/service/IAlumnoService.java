@@ -9,5 +9,6 @@ import com.udec.repository.IOperacionesGenericas;
 public interface IAlumnoService extends IOperacionesGenericas<Alumno, Integer> {
 	List<Alumno> ordenarPorNombres();
 	Page<Alumno> listarPorNombre(int page, int size, String nombre);
+	Page<Alumno> listarPorNombre2(int page, int size, String nombre);
 	boolean validarFecha(Alumno alumno);
 }

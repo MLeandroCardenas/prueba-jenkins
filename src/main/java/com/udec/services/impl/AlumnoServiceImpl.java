@@ -87,4 +87,11 @@ public class AlumnoServiceImpl implements IAlumnoService {
 		Page<Alumno> listaAutoresPaginada = repo.findAll(PageRequest.of(page, size, Sort.by("nombres").ascending())); 
 		return listaAutoresPaginada;
 	}
+
+
+	@Override
+	public Page<Alumno> listarPorNombre2(int page, int size, String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
